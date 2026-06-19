@@ -31,7 +31,7 @@ export interface PurchaseEntry {
   amount: number;
   category: PurchaseCategory;
   decision: Decision;
-  source?: string; // amazon, myntra, ...
+  source?: string; // shopping site, food-delivery app, etc.
   createdAt: number;
 }
 
@@ -45,14 +45,14 @@ const DEFAULT_PROFILE: UserProfile = {
   name: "friend",
   onboarded: false,
   finance: {
-    monthlyIncome: 60000,
-    hourlyRate: 400,
-    currency: "INR" as Currency,
-    weeklyDiscretionary: 3000,
-    coffeeBudget: 300,
-    foodDeliveryAvg: 400,
-    savingsGoal: 100000,
-    monthlySavingsRate: 8000,
+    monthlyIncome: 3000,
+    hourlyRate: 20,
+    currency: "USD" as Currency,
+    weeklyDiscretionary: 150,
+    coffeeBudget: 5,
+    foodDeliveryAvg: 18,
+    savingsGoal: 5000,
+    monthlySavingsRate: 400,
   },
 };
 
