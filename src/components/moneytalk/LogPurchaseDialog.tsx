@@ -72,7 +72,7 @@ export function LogPurchaseDialog({ open, onClose }: { open: boolean; onClose: (
             <div className="grid gap-4 py-2">
               <Field label="What were you eyeing?">
                 <Input
-                  placeholder="e.g. Y2K hoodie, midnight Swiggy"
+                  placeholder="e.g. Y2K hoodie, late-night food delivery"
                   value={item}
                   onChange={(e) => setItem(e.target.value)}
                 />
