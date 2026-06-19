@@ -1,0 +1,90 @@
+/* MoneyTalk overlay — scoped, high specificity, isolated */
+#moneytalk-root, #moneytalk-root * {
+  box-sizing: border-box;
+  font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, system-ui, sans-serif;
+}
+#moneytalk-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(15, 12, 30, 0.55);
+  backdrop-filter: blur(6px);
+  z-index: 2147483646;
+  display: flex; align-items: center; justify-content: center;
+  animation: mt-fade 180ms ease-out;
+}
+#moneytalk-modal {
+  position: relative;
+  width: min(440px, calc(100vw - 32px));
+  background: #fdf8f1;
+  color: #1a1530;
+  border-radius: 28px;
+  padding: 28px 26px 24px;
+  box-shadow: 0 30px 80px rgba(15, 12, 30, 0.45), 0 0 0 1px rgba(0,0,0,0.04);
+  animation: mt-pop 220ms cubic-bezier(.2,.9,.3,1.2);
+  font-size: 15px;
+  line-height: 1.45;
+}
+#moneytalk-modal .mt-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #4f46e51a; color: #4f46e5;
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; padding: 5px 10px; border-radius: 999px;
+}
+#moneytalk-modal h2 {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 28px; line-height: 1.05; font-weight: 900;
+  margin: 12px 0 4px; color: #1a1530;
+}
+#moneytalk-modal .mt-price {
+  font-size: 40px; font-weight: 900; color: #ef4444;
+  letter-spacing: -.02em; margin: 6px 0 14px;
+  font-family: "Fraunces", Georgia, serif;
+}
+#moneytalk-modal .mt-sub {
+  font-size: 13px; color: #5b5572; margin-bottom: 14px;
+}
+#moneytalk-modal ul { list-style: none; padding: 0; margin: 0 0 18px; }
+#moneytalk-modal li {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 10px 12px; background: #fff;
+  border: 1px solid #efe7d8; border-radius: 14px; margin-bottom: 8px;
+  font-size: 14px;
+}
+#moneytalk-modal li .mt-emoji { font-size: 18px; line-height: 1; }
+#moneytalk-modal li b { color: #1a1530; font-weight: 800; }
+#moneytalk-modal .mt-actions {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px;
+}
+#moneytalk-modal button {
+  appearance: none; border: 0; cursor: pointer;
+  padding: 13px 14px; border-radius: 999px;
+  font-size: 14px; font-weight: 800; letter-spacing: .01em;
+  transition: transform .12s ease, opacity .12s ease;
+}
+#moneytalk-modal button:hover { transform: translateY(-1px); }
+#moneytalk-modal .mt-cancel {
+  background: #1a1530; color: #fdf8f1;
+}
+#moneytalk-modal .mt-proceed {
+  background: transparent; color: #1a1530; border: 1.5px solid #1a1530;
+}
+#moneytalk-modal .mt-close {
+  position: absolute; top: 12px; right: 14px;
+  background: transparent; color: #5b5572; font-size: 22px; padding: 4px 8px;
+}
+#moneytalk-modal .mt-footer {
+  margin-top: 14px; text-align: center;
+  font-size: 11px; color: #8a849c; letter-spacing: .08em; text-transform: uppercase;
+}
+@keyframes mt-fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes mt-pop {
+  from { opacity: 0; transform: scale(.92) translateY(8px) }
+  to   { opacity: 1; transform: scale(1) translateY(0) }
+}
+@media (prefers-color-scheme: dark) {
+  #moneytalk-modal { background: #1c1832; color: #fdf8f1; }
+  #moneytalk-modal h2 { color: #fdf8f1; }
+  #moneytalk-modal li { background: #25204a; border-color: #2f2a55; color: #e9e4ff; }
+  #moneytalk-modal li b { color: #fff; }
+  #moneytalk-modal .mt-proceed { color: #fdf8f1; border-color: #fdf8f1; }
+  #moneytalk-modal .mt-cancel { background: #ef4444; color: #fff; }
+}

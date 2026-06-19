@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>MoneyTalk</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    width: 320px; margin: 0; padding: 18px 18px 16px;
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, system-ui, sans-serif;
+    background: #fdf8f1; color: #1a1530;
+  }
+  .chip {
+    display: inline-block; background: #4f46e51a; color: #4f46e5;
+    font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+    padding: 4px 9px; border-radius: 999px;
+  }
+  h1 {
+    font-family: "Fraunces", Georgia, serif; font-weight: 900; font-size: 22px;
+    margin: 10px 0 2px; line-height: 1.05;
+  }
+  p.sub { margin: 0 0 14px; font-size: 12px; color: #5b5572; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  label { display: block; font-size: 10px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: #5b5572; margin-bottom: 4px; }
+  input, select {
+    width: 100%; padding: 8px 10px; border-radius: 10px; font-size: 13px;
+    border: 1px solid #e7dfcf; background: #fff; color: #1a1530;
+  }
+  input:focus, select:focus { outline: 2px solid #4f46e5; outline-offset: 0; }
+  button.save {
+    width: 100%; margin-top: 8px; padding: 11px;
+    background: #1a1530; color: #fdf8f1; border: 0; border-radius: 999px;
+    font-weight: 800; font-size: 13px; cursor: pointer;
+  }
+  .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 14px; }
+  .stat { background: #fff; border: 1px solid #efe7d8; border-radius: 12px; padding: 8px; text-align: center; }
+  .stat b { display: block; font-family: "Fraunces", serif; font-size: 18px; font-weight: 900; }
+  .stat span { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: #8a849c; }
+  .saved-msg { margin-top: 8px; font-size: 11px; color: #16a34a; min-height: 14px; text-align: center; }
+</style>
+</head>
+<body>
+  <span class="chip">✨ MoneyTalk</span>
+  <h1>Vibe check your cart</h1>
+  <p class="sub">Set your numbers — we'll show the real cost before checkout.</p>
+
+  <div class="grid">
+    <div>
+      <label>Currency</label>
+      <select id="currency">
+        <option>USD</option><option>INR</option><option>EUR</option><option>GBP</option>
+      </select>
+    </div>
+    <div>
+      <label>Hourly rate</label>
+      <input id="hourlyRate" type="number" min="0" step="0.5" />
+    </div>
+    <div>
+      <label>Monthly income</label>
+      <input id="monthlyIncome" type="number" min="0" />
+    </div>
+    <div>
+      <label>Weekly fun $</label>
+      <input id="weeklyDiscretionary" type="number" min="0" />
+    </div>
+    <div>
+      <label>Coffee avg</label>
+      <input id="coffeeBudget" type="number" min="0" step="0.5" />
+    </div>
+    <div>
+      <label>Delivery avg</label>
+      <input id="foodDeliveryAvg" type="number" min="0" step="0.5" />
+    </div>
+    <div style="grid-column: span 2">
+      <label>Monthly savings goal</label>
+      <input id="monthlySavingsRate" type="number" min="0" />
+    </div>
+  </div>
+
+  <button class="save" id="save">Save settings</button>
+  <div class="saved-msg" id="msg"></div>
+
+  <div class="stats">
+    <div class="stat"><b id="s-rec">0</b><span>Reconsidered</span></div>
+    <div class="stat"><b id="s-sav">$0</b><span>Saved</span></div>
+    <div class="stat"><b id="s-pro">0</b><span>Proceeded</span></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
