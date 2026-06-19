@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "MoneyTalk — Vibe Check Your Cart",
+  "version": "1.0.0",
+  "description": "Intercepts checkouts on shopping & food-delivery sites and reframes the price as work hours, coffees, and food deliveries. Save the bag.",
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": [
+        "*://*.google.com/*",
+        "*://*.gmail.com/*",
+        "*://*.youtube.com/*",
+        "*://*.github.com/*",
+        "*://*.lovable.app/*",
+        "*://*.lovable.dev/*",
+        "*://localhost/*"
+      ],
+      "js": ["content.js"],
+      "css": ["overlay.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

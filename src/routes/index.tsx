@@ -10,6 +10,7 @@ import { NeedsWantsDonut } from "@/components/moneytalk/NeedsWantsDonut";
 import { RecentReceipts } from "@/components/moneytalk/RecentReceipts";
 import { Onboarding } from "@/components/moneytalk/Onboarding";
 import { LogPurchaseDialog } from "@/components/moneytalk/LogPurchaseDialog";
+import { ExtensionCard } from "@/components/moneytalk/ExtensionCard";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -130,6 +131,9 @@ function Dashboard() {
           <WeeklyChart data={stats.weeklySpend} />
           <NeedsWantsDonut needs={stats.needsVsWants.needs} wants={stats.needsVsWants.wants} />
         </section>
+
+        {/* Extension */}
+        <ExtensionCard />
 
         {/* Receipts */}
         <section className="mt-5">
