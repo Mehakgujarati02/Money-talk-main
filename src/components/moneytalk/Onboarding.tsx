@@ -54,6 +54,23 @@ export function Onboarding({ open, onClose }: { open: boolean; onClose: () => vo
           monthlySavingsRate: Number(form.monthlySavingsRate) || 0,
         },
       });
+
+      const state = useMoneyTalk.getState();
+      pendo.identify({
+        visitor: {
+          id: '',
+          name: state.profile.name,
+          onboarded: state.profile.onboarded,
+          currency: state.profile.finance.currency,
+          monthlyIncome: state.profile.finance.monthlyIncome,
+          hourlyRate: state.profile.finance.hourlyRate,
+          weeklyDiscretionary: state.profile.finance.weeklyDiscretionary,
+          savingsGoal: state.profile.finance.savingsGoal,
+          monthlySavingsRate: state.profile.finance.monthlySavingsRate,
+          theme: state.theme,
+        },
+      });
+
       onClose();
     }
   };
