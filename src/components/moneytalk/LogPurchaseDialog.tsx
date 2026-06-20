@@ -40,6 +40,16 @@ export function LogPurchaseDialog({ open, onClose }: { open: boolean; onClose: (
   const submit = () => {
     if (!item.trim() || amount <= 0) return;
     addPurchase({ item: item.trim(), amount, category, decision });
+    if ((window as any).pendo) {
+      (window as any).pendo.track("purchase_logged", {
+        decision,
+        category,
+        amount,
+        currency: finance.currency,
+        item: item.trim(),
+        comparisons_shown_count: comparisons.length,
+      });
+    }
     if (decision === "skipped") setShowReceipt(true);
     else {
       onClose();

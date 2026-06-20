@@ -21,10 +21,21 @@ export function ExtensionCard() {
         a.click();
         URL.revokeObjectURL(a.href);
         setStatus("done");
+        if ((window as any).pendo) {
+          (window as any).pendo.track("extension_zip_downloaded", {
+            download_status: "success",
+          });
+        }
       })
       .catch((e) => {
         setStatus("error");
         setErr(e.message);
+        if ((window as any).pendo) {
+          (window as any).pendo.track("extension_zip_downloaded", {
+            download_status: "failure",
+            error_message: String(e.message).substring(0, 200),
+          });
+        }
       });
   };
 

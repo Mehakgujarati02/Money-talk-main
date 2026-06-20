@@ -32,6 +32,14 @@ export function RegretReceipt({ item, amount }: Props) {
       a.href = dataUrl;
       a.download = `moneytalk-receipt-${Date.now()}.png`;
       a.click();
+      if ((window as any).pendo) {
+        (window as any).pendo.track("regret_receipt_downloaded", {
+          item,
+          amount,
+          currency: finance.currency,
+          comparisons_count: comps.length,
+        });
+      }
     } finally {
       setBusy(false);
     }
@@ -41,11 +49,27 @@ export function RegretReceipt({ item, amount }: Props) {
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
         await navigator.share({ title: "MoneyTalk Receipt", text: caption });
+        if ((window as any).pendo) {
+          (window as any).pendo.track("regret_receipt_shared", {
+            share_method: "native_share",
+            item,
+            amount,
+            currency: finance.currency,
+          });
+        }
       } catch {
         /* user cancelled */
       }
     } else {
       await navigator.clipboard.writeText(caption);
+      if ((window as any).pendo) {
+        (window as any).pendo.track("regret_receipt_shared", {
+          share_method: "clipboard",
+          item,
+          amount,
+          currency: finance.currency,
+        });
+      }
     }
   };
 

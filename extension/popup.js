@@ -27,6 +27,17 @@ document.getElementById("save").addEventListener("click", () => {
     const msg = document.getElementById("msg");
     msg.textContent = "Saved · let's get that bag 💸";
     setTimeout(() => (msg.textContent = ""), 1800);
+    if (typeof pendo !== "undefined" && pendo.track) {
+      pendo.track("extension_profile_saved", {
+        currency: profile.currency,
+        hourly_rate: profile.hourlyRate,
+        monthly_income: profile.monthlyIncome,
+        weekly_discretionary: profile.weeklyDiscretionary,
+        coffee_budget: profile.coffeeBudget,
+        food_delivery_avg: profile.foodDeliveryAvg,
+        monthly_savings_rate: profile.monthlySavingsRate,
+      });
+    }
     load();
   });
 });
