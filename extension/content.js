@@ -154,6 +154,15 @@
       else { next.saved += price; }
       stats = next;
       chrome.storage.local.set({ stats: next });
+      if (typeof pendo !== "undefined" && pendo.track) {
+        pendo.track("checkout_decision_made", {
+          decision: proceed ? "proceeded" : "skipped",
+          price: price,
+          currency: profile.currency,
+          source_site: sourceLabel,
+          amount_saved: proceed ? 0 : price,
+        });
+      }
       if (proceed && pendingAction) pendingAction();
       pendingAction = null;
     };
@@ -187,5 +196,13 @@
       setTimeout(() => { delete el.dataset.mtIgnore; }, 1500);
     };
     openModal(price, location.hostname.replace(/^www\./, ""));
+    if (typeof pendo !== "undefined" && pendo.track) {
+      pendo.track("checkout_intercepted", {
+        price: price,
+        currency: profile.currency,
+        source_site: location.hostname.replace(/^www\./, ""),
+        comparisons_count: compare(price, profile).slice(0, 4).length,
+      });
+    }
   }, true);
 })();

@@ -19,6 +19,7 @@ export function Onboarding({ open, onClose }: { open: boolean; onClose: () => vo
   const finance = useMoneyTalk((s) => s.profile.finance);
   const name = useMoneyTalk((s) => s.profile.name);
   const complete = useMoneyTalk((s) => s.completeOnboarding);
+  const onboarded = useMoneyTalk((s) => s.profile.onboarded);
 
   const [step, setStep] = useState(0);
   const [form, setForm] = useState({
@@ -54,6 +55,18 @@ export function Onboarding({ open, onClose }: { open: boolean; onClose: () => vo
           monthlySavingsRate: Number(form.monthlySavingsRate) || 0,
         },
       });
+      if ((window as any).pendo) {
+        (window as any).pendo.track(onboarded ? "profile_settings_updated" : "onboarding_completed", {
+          currency: form.currency,
+          monthly_income: Number(form.monthlyIncome) || 0,
+          hourly_rate: Number(form.hourlyRate) || 0,
+          weekly_discretionary: Number(form.weeklyDiscretionary) || 0,
+          coffee_budget: Number(form.coffeeBudget) || 0,
+          food_delivery_avg: Number(form.foodDeliveryAvg) || 0,
+          savings_goal: Number(form.savingsGoal) || 0,
+          monthly_savings_rate: Number(form.monthlySavingsRate) || 0,
+        });
+      }
       onClose();
     }
   };

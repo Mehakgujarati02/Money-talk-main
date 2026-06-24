@@ -65,7 +65,18 @@ export function RecentReceipts() {
                     {formatMoney(p.amount, finance.currency)}
                   </span>
                   <button
-                    onClick={() => remove(p.id)}
+                    onClick={() => {
+                      if ((window as any).pendo) {
+                        (window as any).pendo.track("purchase_deleted", {
+                          purchase_id: p.id,
+                          decision: p.decision,
+                          category: p.category,
+                          amount: p.amount,
+                          currency: finance.currency,
+                        });
+                      }
+                      remove(p.id);
+                    }}
                     className="text-muted-foreground/60 hover:text-destructive"
                     aria-label="Delete"
                   >
